@@ -4,21 +4,27 @@ import Weather_Key from "../config";
 const OpenWeatherKey = Weather_Key;
 const Url = "https://api.openweathermap.org/data/2.5/weather";
 
-const FetchWeatherApi = async (query) => {
+const FetchWeatherApi = async (query, lat, lon) => {
+  const params = {
+    units: "metric",
+    APPID: OpenWeatherKey
+  };
+  
+  if (lat && lon) {
+    params.lat = lat;
+    params.lon = lon;
+  } else {
+    params.q = query;
+  }
+
   try {
-    const { data } = await Axios.get(Url, {
-      params: {
-        q: query,
-        units: "metric",
-        APPID: OpenWeatherKey
-      }
-    });
+    const { data } = await Axios.get(Url, { params });
     return data;
   } catch (err) {
     if (err.response) {
-      alert("Enter valid city name");
+      alert("Enter valid city name or coordinates");
     }
-    return null; 
+    return null;
   }
 };
 

@@ -10,19 +10,30 @@ body,
 
 h1 {
   color: #fff;
+  margin-bottom: 1rem;
 }
+
 label {
   color: #fff;
 }
+
 .units {
   display: flex;
   flex-direction: row;
 }
+
 .main-container {
   background: url("https://ik.imagekit.io/d5scjfbjc/index_0nNrywa8ul.svg");
   background-size: cover;
   background-position: center;
   overflow: hidden;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 1rem;
+  box-sizing: border-box;
 }
 
 .sunrise {
@@ -39,14 +50,6 @@ label {
   overflow: hidden;
 }
 
-.main-container {
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-
 .search {
   text-align: center;
   outline: none;
@@ -55,6 +58,38 @@ label {
   border: 1px solid black;
   margin-bottom: 2%;
   background: rgba(250, 250, 250, 0.85);
+  width: 100%;
+  max-width: 400px;
+}
+
+.coordinates-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.coordinate-input {
+  text-align: center;
+  outline: none;
+  padding: 10px 5%;
+  border-radius: 20px;
+  border: 1px solid black;
+  margin: 0.5rem 0;
+  background: rgba(250, 250, 250, 0.85);
+  width: 100%;
+  max-width: 200px;
+}
+
+.search-btn,
+.location-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  background: #ff8c00;
+  color: #fff;
+  cursor: pointer;
+  margin-top: 1rem;
 }
 
 .city {
@@ -83,15 +118,8 @@ p {
   text-align: center;
 }
 
-.ctiy sup {
-  font-size: 0.5em;
-}
-
-.city-name {
-  font-size: 2em;
-}
-
 .city-name sup {
+  font-size: 0.5em;
   padding: 0.2em 0.6em;
   margin-left: 0.2em;
   border-radius: 30px;
@@ -111,19 +139,6 @@ p {
   align-items: center;
 }
 
-@media only screen and (max-width: 600px) {
-  .search {
-    padding: 20px 15%;
-  }
-  .city {
-    padding: 15px 20%;
-  }
-  .forecast {
-    margin-left: 5px;
-    margin-right: 5px;
-  }
-}
-
 .container {
   display: flex;
   width: 80%;
@@ -132,6 +147,7 @@ p {
   text-align: center;
   margin: 0 auto;
 }
+
 .forecast {
   color: #0a1f44;
   text-align: center;
@@ -142,14 +158,41 @@ p {
   height: 120px;
   width: 150px;
 }
+
 .forecast div {
   margin-bottom: 5px;
 }
+
 .forecast-img {
   width: 50px;
   height: 50px;
 }
+
 .date {
   margin-top: 5px;
   margin-bottom: 10px;
+}
+
+@media only screen and (max-width: 600px) {
+  .search {
+    padding: 20px 15%;
+  }
+  
+  .coordinates-container {
+    width: 100%;
+    padding: 0 10%;
+  }
+
+  .coordinate-input {
+    width: 100%;
+  }
+
+  .city {
+    padding: 15px 20%;
+  }
+
+  .forecast {
+    margin-left: 5px;
+    margin-right: 5px;
+  }
 }

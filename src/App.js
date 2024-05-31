@@ -1,3 +1,4 @@
+// App.js
 import React, { useState } from "react";
 import FetchWeatherApi from "./api/fetchWeather";
 import moment from "moment";
@@ -8,6 +9,8 @@ const App = () => {
   const [query, setQuery] = useState("");
   const [weather, setWeather] = useState({});
   const [weather2, setWeather2] = useState([]);
+  const [lat, setLat] = useState(null);
+  const [lon, setLon] = useState(null);
 
   const search = async (e) => {
     if (e.key === "Enter") {
@@ -15,9 +18,30 @@ const App = () => {
       if (data) {
         setWeather(data);
         checkTime(data);
-        await forecast(data.name); 
+        await forecast(data.name);
       }
       setQuery("");
+    }
+  };
+
+  const searchByCoordinates = async () => {
+    const data = await FetchWeatherApi("", lat, lon);
+    if (data) {
+      setWeather(data);
+      checkTime(data);
+      await forecast("", lat, lon);
+    }
+  };
+
+  const getCurrentLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        setLat(position.coords.latitude);
+        setLon(position.coords.longitude);
+        searchByCoordinates();
+      });
+    } else {
+      alert("Geolocation is not supported by this browser.");
     }
   };
 
@@ -37,8 +61,8 @@ const App = () => {
     }
   }
 
-  const forecast = async (city) => {
-    const data = await FetchForecast(city); 
+  const forecast = async (city, lat, lon) => {
+    const data = await FetchForecast(city, lat, lon);
     if (data && data.list) {
       const forecastData = [];
 
@@ -86,6 +110,28 @@ const App = () => {
         onChange={(e) => setQuery(e.target.value)}
         onKeyPress={search}
       />
+      <button className="location-btn" onClick={getCurrentLocation}>
+        Use Current Location
+      </button>
+      <div className="coordinates-container">
+        <input
+          type="number"
+          placeholder="Latitude"
+          value={lat || ""}
+          onChange={(e) => setLat(e.target.value)}
+          className="coordinate-input"
+        />
+        <input
+          type="number"
+          placeholder="Longitude"
+          value={lon || ""}
+          onChange={(e) => setLon(e.target.value)}
+          className="coordinate-input"
+        />
+        <button className="search-btn" onClick={searchByCoordinates}>
+          Search by Coordinates
+        </button>
+      </div>
       {weather.main && (
         <div className="city">
           <h2 className="city-name">
