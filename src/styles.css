@@ -155,8 +155,9 @@ p {
   border-radius: 10px;
   background: rgba(180, 180, 180, 0.85);
   box-shadow: 10px 10px 5px 0px rgba(15, 15, 15, 0.404);
-  height: 120px;
-  width: 150px;
+  height: 110px;  /* Reduced height */
+  width: 140px;   /* Reduced width */
+  margin: 5px;    /* Added margin for better spacing */
 }
 
 .forecast div {
